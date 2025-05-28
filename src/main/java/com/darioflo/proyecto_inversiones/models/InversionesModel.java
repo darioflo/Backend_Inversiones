@@ -1,6 +1,11 @@
 package com.darioflo.proyecto_inversiones.models;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Inversiones {
+@Document(collection = "inversiones")
+
+public class InversionesModel {
+    @Id
     private String idInversion;
     private String nombre;
     private String descripcion;
@@ -11,7 +16,7 @@ public class Inversiones {
     private double saldoAlTermino;
     private String instruccionVencimiento;
 
-    public Inversiones( String nombre, String descripcion, int plazo, double tasa, double rendimientoAnual, double saldoInicial, double saldoAlTermino, String instruccionVencimiento) {
+    public InversionesModel( String nombre, String descripcion, int plazo, double tasa, double rendimientoAnual, double saldoInicial, double saldoAlTermino, String instruccionVencimiento) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.plazo = plazo;

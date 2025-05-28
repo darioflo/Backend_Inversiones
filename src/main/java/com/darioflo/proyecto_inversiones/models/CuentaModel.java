@@ -1,11 +1,16 @@
 package com.darioflo.proyecto_inversiones.models;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Cuenta {
+@Document(collection = "cuentas")
+
+public class CuentaModel {
+    @Id
     private String idCuenta;
     private String idCliente;
     private Integer saldo;
 
-    public Cuenta (String idCliente, Integer saldo){
+    public CuentaModel (String idCliente, Integer saldo){
         this.idCliente = idCliente; 
         this.saldo = saldo;
     }

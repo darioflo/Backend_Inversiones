@@ -1,11 +1,16 @@
 package com.darioflo.proyecto_inversiones.models;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 
-public class Contrato {
+@Document(collection = "contratos")
+
+public class ContratoModel {
+    @Id
     private String idContrato;
     private String idCuenta;
     private String tipoContrato;
 
-    public Contrato (String idCuenta, String tipoContrato){
+    public ContratoModel (String idCuenta, String tipoContrato){
         this.idCuenta = idCuenta;
         this.tipoContrato = tipoContrato;
     }

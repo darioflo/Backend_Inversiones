@@ -1,6 +1,11 @@
 package com.darioflo.proyecto_inversiones.models;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
+
+@Document(collection = "clientes")
 
 public class ClienteModel {
+    @Id
     private String idCliente;
     private String nombre;
     private String apellidoPaterno;
@@ -9,8 +14,7 @@ public class ClienteModel {
 
 
 
-    public ClienteModel(String idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String direccion){
-        this.idCliente = idCliente;
+    public ClienteModel(String nombre, String apellidoPaterno, String apellidoMaterno, String direccion){
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -23,10 +27,10 @@ public class ClienteModel {
         return this.idCliente;
     }
 
-    public void setNombreCLiente(String nombreNuevo){
+    public void setNombre(String nombreNuevo){
         this.nombre = nombreNuevo;
     }
-    public String getNombreCliente(){
+    public String getNombre(){
         return this.nombre;
     }
 
