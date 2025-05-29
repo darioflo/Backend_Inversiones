@@ -3,7 +3,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 
 @Document(collection = "clientes")
-
 public class ClienteModel {
     @Id
     private String idCliente;

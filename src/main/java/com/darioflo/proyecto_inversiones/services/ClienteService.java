@@ -26,7 +26,7 @@ public class ClienteService {
     }
 
     public ArrayList<ClienteModel> obtenerClientesPorNombre(String nombre){
-        return (ArrayList<ClienteModel>) clienteRepository.findByNombreCliente(nombre);
+        return (ArrayList<ClienteModel>) clienteRepository.findByNombre(nombre);
     }
 
     public boolean eliminarCliente(String id){

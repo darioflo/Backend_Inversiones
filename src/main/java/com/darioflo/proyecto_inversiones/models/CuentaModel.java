@@ -2,11 +2,11 @@ package com.darioflo.proyecto_inversiones.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "cuentas")
 
+@Document(collection = "cuentas")
 public class CuentaModel {
     @Id
-    private String idCuenta;
+    private String id;
     private String idCliente;
     private Integer saldo;
 
@@ -16,7 +16,7 @@ public class CuentaModel {
     }
 
     public String getIdCuenta(){
-        return this.idCuenta;
+        return this.id;
     }
 
     public String getIdCliente(){
@@ -26,6 +26,7 @@ public class CuentaModel {
     public Integer getSaldoCuenta(){
         return this.saldo;
     }
+    
     public void setSaldoCuenta(Integer nuevoSaldo){
         this.saldo = nuevoSaldo;
     }
