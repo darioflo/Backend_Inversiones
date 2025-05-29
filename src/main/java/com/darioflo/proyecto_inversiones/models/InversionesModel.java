@@ -16,16 +16,9 @@ public class InversionesModel {
     private double saldoAlTermino;
     private String instruccionVencimiento;
 
-    public InversionesModel( String nombre, String descripcion, int plazo, double tasa, double rendimientoAnual, double saldoInicial, double saldoAlTermino, String instruccionVencimiento) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.plazo = plazo;
-        this.tasa = tasa;
-        this.rendimientoAnual = rendimientoAnual;
-        this.saldoInicial = saldoInicial;
-        this.saldoAlTermino = saldoAlTermino;
-        this.instruccionVencimiento = instruccionVencimiento;
-    }
+    //constructor
+    public InversionesModel( ){}
+    
 
     public String getIdInversion() {
         return idInversion;
