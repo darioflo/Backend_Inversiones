@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CuentaModel {
 
     @Id
-    private String id;         
+    private String idCuenta;         
     private String idCliente;
     private Integer saldo;
 
@@ -18,8 +18,8 @@ public class CuentaModel {
         this.saldo = saldo;
     }
 
-    public String getId() {
-        return id;
+    public String getIdCuenta() {
+        return idCuenta;
     }
 
     public String getIdCliente() {
