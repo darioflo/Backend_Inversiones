@@ -5,29 +5,36 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "cuentas")
 public class CuentaModel {
+
     @Id
-    private String id;
+    private String id;         
     private String idCliente;
     private Integer saldo;
 
-    public CuentaModel (String idCliente, Integer saldo){
-        this.idCliente = idCliente; 
+    public CuentaModel() {}
+
+    public CuentaModel(String idCliente, Integer saldo) {
+        this.idCliente = idCliente;
         this.saldo = saldo;
     }
 
-    public String getIdCuenta(){
-        return this.id;
+    public String getId() {
+        return id;
     }
 
-    public String getIdCliente(){
-        return this.idCliente;
+    public String getIdCliente() {
+        return idCliente;
     }
 
-    public Integer getSaldoCuenta(){
-        return this.saldo;
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
-    
-    public void setSaldoCuenta(Integer nuevoSaldo){
+
+    public Integer getSaldoCuenta() {
+        return saldo;
+    }
+
+    public void setSaldoCuenta(Integer nuevoSaldo) {
         this.saldo = nuevoSaldo;
     }
 }
