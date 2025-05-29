@@ -1,5 +1,7 @@
 package com.darioflo.proyecto_inversiones.controllers;
 import java.util.ArrayList;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +26,7 @@ public class CuentaController {
         return cuentaService.obtenerCuentas();
     }
     @GetMapping("/{idCuenta}")
-    public CuentaModel obtenerCuentaPorId(@PathVariable("idCuenta") String id) {
+    public Optional<CuentaModel> obtenerCuentaPorId(@PathVariable("idCuenta") String id) {
         return cuentaService.obtenerCuentaPorID(id);
     }
     @GetMapping("/cuentasCliente/{idCliente}")
