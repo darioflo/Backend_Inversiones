@@ -33,7 +33,7 @@ public class CuentaController {
     public ArrayList<CuentaModel> obtenerCuentasCliente(@PathVariable("idCliente") String id) {
         return cuentaService.obtenerCuentasCliente(id);
     }
-    @PutMapping("/cuenta/{idCuenta}/saldo")
+    @PutMapping("/{idCuenta}/saldo")
     public CuentaModel actualizarSaldo(@PathVariable("idCuenta") String idCuenta, @RequestBody Integer nuevoSaldo){
         return cuentaService.actualizarSaldo(idCuenta, nuevoSaldo);
     } 

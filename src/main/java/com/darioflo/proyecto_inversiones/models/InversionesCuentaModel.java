@@ -9,7 +9,7 @@ public class InversionesCuentaModel {
     @Id
     private String idInversionCuenta;
 
-    private IdCuenta idCuenta;//
+    private IdCuenta idCuenta;
     private IdInversion idInversion;//
     private boolean estaActiva;
     private int plazo;
@@ -103,16 +103,11 @@ public class InversionesCuentaModel {
 
     // Clases internas para idCuenta y idInversion
     public static class IdCuenta {
-        private String idCuenta;
+    private String id;
 
-        public String getIdCuenta() {
-            return idCuenta;
-        }
-
-        public void setIdCuenta(String idCuenta) {
-            this.idCuenta = idCuenta;
-        }
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+}
 
     public static class IdInversion {
         private String idInversion;
