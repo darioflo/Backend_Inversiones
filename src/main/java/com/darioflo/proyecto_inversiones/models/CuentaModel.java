@@ -12,6 +12,7 @@ public class CuentaModel {
     private String idCuenta;     // Este es tu identificador de negocio
     private String idCliente;
     private Integer saldo;
+    private String tipoCuenta;
 
     public CuentaModel() {}
 
@@ -47,5 +48,12 @@ public class CuentaModel {
 
     public void setSaldo(Integer nuevoSaldo) {
         this.saldo = nuevoSaldo;
+    }
+        public String getTipoCuenta() {
+        return tipoCuenta;
+    }
+
+    public void setTipoCuenta(String tipoCuenta) {
+        this.idCuenta = tipoCuenta;
     }
 }
