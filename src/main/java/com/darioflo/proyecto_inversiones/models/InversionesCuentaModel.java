@@ -9,8 +9,8 @@ public class InversionesCuentaModel {
     @Id
     private String idInversionCuenta;
 
-    private IdCuenta idCuenta;
-    private IdInversion idInversion;//
+    private Cuenta cuenta;
+    private Inversion Inversion;//
     private boolean estaActiva;
     private int plazo;
     private double tasa;
@@ -29,20 +29,20 @@ public class InversionesCuentaModel {
         this.idInversionCuenta = idInversionCuenta;
     }
 
-    public IdCuenta getIdCuenta() {
-        return idCuenta;
+    public Cuenta getCuenta() {
+        return cuenta;
     }
 
-    public void setIdCuenta(IdCuenta idCuenta) {
-        this.idCuenta = idCuenta;
+    public void setCuenta(Cuenta nuevaCuenta) {
+        this.cuenta = nuevaCuenta;
     }
 
-    public IdInversion getIdInversion() {
-        return idInversion;
+    public Inversion getInversion() {
+        return Inversion;
     }
 
-    public void setIdInversion(IdInversion idInversion) {
-        this.idInversion = idInversion;
+    public void setInversion(Inversion Inversion) {
+        this.Inversion = Inversion;
     }
 
     public boolean isEstaActiva() {
@@ -101,16 +101,25 @@ public class InversionesCuentaModel {
         this.instruccionVencimiento = instruccionVencimiento;
     }
 
-    // Clases internas para idCuenta y idInversion
-    public static class IdCuenta {
+    // Sublases internas para idCuenta y idInversion
+    public static class Cuenta {
     private String id;
+    private String numeroCuenta;
+    private Integer saldo;
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
+    
+    public String getNumeroCuenta() { return numeroCuenta; }
+    public void setNumeroCuenta(String nuevoNumeroCuenta) { this.numeroCuenta = nuevoNumeroCuenta; }
+    
+    public Integer getSaldo() { return saldo; }
+    public void setSaldo(Integer nuevoSaldo) { this.saldo = nuevoSaldo; }
 }
 
-    public static class IdInversion {
+    public static class Inversion {
         private String idInversion;
+        private String nombre;
 
         public String getIdInversion() {
             return idInversion;
@@ -118,6 +127,14 @@ public class InversionesCuentaModel {
 
         public void setIdInversion(String idInversion) {
             this.idInversion = idInversion;
+        }
+
+        public String getNombre(){
+            return nombre;
+        }
+
+        public void setNombre(String nuevoNombre){
+            this.nombre = nuevoNombre;
         }
     }
 }
