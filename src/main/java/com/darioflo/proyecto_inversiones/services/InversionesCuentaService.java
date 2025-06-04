@@ -52,4 +52,8 @@ public class InversionesCuentaService {
         return inversionesCuentaRepository.save(inversionExistente);
     }).orElse(null);
     }
+
+    public void eliminarInversionCuenta(String id){
+        inversionesCuentaRepository.deleteById(id);
+    }
 }

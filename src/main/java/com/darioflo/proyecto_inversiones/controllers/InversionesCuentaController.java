@@ -2,6 +2,7 @@ package com.darioflo.proyecto_inversiones.controllers;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.darioflo.proyecto_inversiones.models.InversionesCuentaModel;
@@ -42,5 +43,8 @@ public class InversionesCuentaController {
         return inversionesCuentaService.editarInversionCuenta(id, nuevaInversion);
     }
     
-
-}
+    @DeleteMapping("eliminarInvCuenta/{id}")
+    public void eliminarInversionCuenta(@PathVariable String id){
+        inversionesCuentaService.eliminarInversionCuenta(id);
+    }
+}   
