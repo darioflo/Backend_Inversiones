@@ -1,5 +1,4 @@
 package com.darioflo.proyecto_inversiones.models;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,6 +17,8 @@ public class InversionesCuentaModel {
     private double saldoInicial;
     private double saldoAlTermino;
     private String instruccionVencimiento;
+    private String fechaInicio;
+    private String fechaFin;
 
     // Getters y setters
 
@@ -99,6 +100,22 @@ public class InversionesCuentaModel {
 
     public void setInstruccionVencimiento(String instruccionVencimiento) {
         this.instruccionVencimiento = instruccionVencimiento;
+    }
+
+    public String getFechaInicio(){
+        return this.fechaInicio;
+    }
+
+    public void setFechaInicio( String nuevaFecha){
+        this.fechaInicio = nuevaFecha;
+    }
+    
+    public String getFechaFin(){
+        return this.fechaFin;
+    }
+
+    public void setFechaFin( String nuevaFecha){
+        this.fechaFin = nuevaFecha;
     }
 
     // Sublases internas para idCuenta y idInversion

@@ -17,6 +17,9 @@ public class HistorialModel {
     private double saldoInicial;
     private double saldoAlTermino;
     private String instruccionVencimiento;
+    private String fechaInicio;
+    private String fechaFin;
+
 
 
     public String getIdInversionCuenta() {
@@ -97,6 +100,21 @@ public class HistorialModel {
 
     public void setInstruccionVencimiento(String instruccionVencimiento) {
         this.instruccionVencimiento = instruccionVencimiento;
+    }
+        public String getFechaInicio(){
+        return this.fechaInicio;
+    }
+
+    public void setFechaInicio( String nuevaFecha){
+        this.fechaInicio = nuevaFecha;
+    }
+    
+    public String getFechaFin(){
+        return this.fechaFin;
+    }
+
+    public void setFechaFin( String nuevaFecha){
+        this.fechaFin = nuevaFecha;
     }
 
     // Sublases internas para idCuenta y idInversion
