@@ -26,17 +26,17 @@ public class HistorialService {
         historialRepository.deleteAll();
     }
 
-public HistorialModel nuevaFechaDeEliminacion(String id) {
-    Optional<HistorialModel> inversionCuenta = historialRepository.findById(id);
-    if (inversionCuenta.isPresent()) {
-        java.time.LocalDate hoy = java.time.LocalDate.now();
-        String nuevaFecha = String.format("%02d/%02d/%04d", hoy.getDayOfMonth(), hoy.getMonthValue(), hoy.getYear());
+    public HistorialModel nuevaFechaDeEliminacion(String id) {
+        Optional<HistorialModel> inversionCuenta = historialRepository.findById(id);
+        if (inversionCuenta.isPresent()) {
+            java.time.LocalDate hoy = java.time.LocalDate.now();
+            String nuevaFecha = String.format("%02d/%02d/%04d", hoy.getDayOfMonth(), hoy.getMonthValue(), hoy.getYear());
 
-        HistorialModel historial = inversionCuenta.get();
-        historial.setFechaFin(nuevaFecha);
-        historialRepository.save(historial);
-        return historial;
+            HistorialModel historial = inversionCuenta.get();
+            historial.setFechaFin(nuevaFecha);
+            historialRepository.save(historial);
+            return historial;
+        }
+        return null;
     }
-    return null;
-}
 }

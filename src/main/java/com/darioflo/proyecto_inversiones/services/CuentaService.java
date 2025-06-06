@@ -24,13 +24,13 @@ public class CuentaService {
 
     public CuentaModel actualizarSaldo(String id,Integer nuevoSaldo){
         Optional<CuentaModel> cuenta = cuentaRepository.findById(id);
-   if (cuenta.isPresent()) {
-        CuentaModel cuentaActual = cuenta.get();
-        cuentaActual.setSaldo(nuevoSaldo);
-        return cuentaRepository.save(cuentaActual);
-    }
-    return null;
-    }
+        if (cuenta.isPresent()) {
+            CuentaModel cuentaActual = cuenta.get();
+            cuentaActual.setSaldo(nuevoSaldo);
+            return cuentaRepository.save(cuentaActual);
+            }
+            return null;
+        }
 
     public String generarNumeroCuenta(String tipoCuenta){
             String prefijo = tipoCuenta.toLowerCase();
