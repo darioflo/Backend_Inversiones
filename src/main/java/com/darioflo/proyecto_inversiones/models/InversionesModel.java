@@ -9,18 +9,14 @@ public class InversionesModel {
     private String nombre;
     private String descripcion;
 
-    //constructor
     public InversionesModel( ){}
     
-
     public String getIdInversion() {
         return idInversion;
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public String getDescripcion() {
         return descripcion;
     }
