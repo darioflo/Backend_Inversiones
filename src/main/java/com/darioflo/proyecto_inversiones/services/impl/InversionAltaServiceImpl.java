@@ -1,4 +1,6 @@
 package com.darioflo.proyecto_inversiones.services.impl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,8 @@ import com.darioflo.proyecto_inversiones.services.interfaces.IInversionAltaServi
 
 @Service
 public class InversionAltaServiceImpl implements IInversionAltaService{
-    
+    private static final Logger logger = LoggerFactory.getLogger(InversionAltaServiceImpl.class);
+
     @Autowired
     private CuentaService cuentaService;
 
@@ -24,22 +27,28 @@ public class InversionAltaServiceImpl implements IInversionAltaService{
 
     @Override
     public InversionesCuentaModel crearInversion(InversionAltaDTO datosRecibidos){
+        
+        logger.info("Iniciando creación de nueva inversión para cuenta ID: {}", datosRecibidos.getCuenta().getId());
 
-        CuentaModel cuenta = cuentaService.obtenerCuentaPorID(datosRecibidos.getIdCuenta()).orElseThrow();
+        CuentaModel cuenta = cuentaService.obtenerCuentaPorID(datosRecibidos.getCuenta().getId()).orElseThrow(() -> {
+            logger.error("Cuenta no encontrada con ID: {}", datosRecibidos.getCuenta().getId());
+            return new IllegalArgumentException("Cuenta no encontrada.");
+            });
         
         CuentaHelpModel cuentaInversion = new CuentaHelpModel();
         cuentaInversion.setId(cuenta.getId());
         cuentaInversion.setNumeroCuenta(cuenta.getNumeroCuenta());
         cuentaInversion.setSaldo(cuenta.getSaldo());
 
-        InversionesModel inversion = inversionesService.obtenerInversionPorID(datosRecibidos.getIdInversion());
+        InversionesModel inversion = inversionesService.obtenerInversionPorID(datosRecibidos.getInversion().getIdInversion());
         
         InversionHelpModel inversionDatos = new InversionHelpModel();
         inversionDatos.setIdInversion(inversion.getIdInversion());
         inversionDatos.setNombre(inversion.getNombre());
 
         if (cuenta.getSaldo() < datosRecibidos.getSaldoInicial()) {
-             throw new IllegalArgumentException("Saldo insuficiente en la cuenta.");
+            logger.warn("Saldo insuficiente para cuenta ID: {}", cuenta.getId());
+            throw new IllegalArgumentException("Saldo insuficiente en la cuenta.");
         }
 
         InversionesCuentaModel nueva = new InversionesCuentaModel();
@@ -57,6 +66,7 @@ public class InversionAltaServiceImpl implements IInversionAltaService{
 
         cuentaService.actualizarSaldo(cuenta.getId(), cuenta.getSaldo() - datosRecibidos.getSaldoInicial().intValue());
 
+        logger.info("Inversión creada correctamente para cuenta ID: {}", cuenta.getId());
         return inversionesCuentaRepository.save(nueva);
     }
 

@@ -1,10 +1,13 @@
 package com.darioflo.proyecto_inversiones.services.DTO;
 
+import com.darioflo.proyecto_inversiones.models.helpers.CuentaHelpModel;
+import com.darioflo.proyecto_inversiones.models.helpers.InversionHelpModel;
 
 public class InversionAltaDTO {
     
-    private String idCuenta;
-    private String idInversion;
+    private String idInversionCuenta;
+    private CuentaHelpModel cuenta;
+    private InversionHelpModel Inversion;
     private Double saldoInicial;
     private int plazo;
     private String instruccionVencimiento;
@@ -12,12 +15,16 @@ public class InversionAltaDTO {
     private Double rendimientoAnual;
     private String fechaInicio;
     private String fechaFin;
+     private boolean estaActiva;
 
-    public String getIdCuenta(){ return this.idCuenta; }
-    public void setIdCuenta (String nuevoIdCuenta){ this.idCuenta = nuevoIdCuenta; }
+    public String getIdInversionCuenta() { return idInversionCuenta; }
+    public void setIdInversionCuenta(String idInversionCuenta) { this.idInversionCuenta = idInversionCuenta; }
 
-    public String getIdInversion(){return this.idInversion; }
-    public void setIdInversion(String nuevoIdInversion){ this.idInversion = nuevoIdInversion; }
+    public CuentaHelpModel getCuenta() { return cuenta; }
+    public void setCuenta(CuentaHelpModel nuevaCuenta) { this.cuenta = nuevaCuenta; }
+
+    public InversionHelpModel getInversion() { return Inversion; }
+    public void setInversion(InversionHelpModel Inversion) { this.Inversion = Inversion;}
 
     public Double getSaldoInicial(){ return this.saldoInicial; }
     public void setSaldoInicial(Double nuevoSaldoInicial) { this.saldoInicial = nuevoSaldoInicial; }
@@ -39,4 +46,7 @@ public class InversionAltaDTO {
 
     public String getFechaFin() { return fechaFin; }
     public void setFechaFin(String fechaFin) { this.fechaFin = fechaFin;}
+
+    public boolean isEstaActiva() { return estaActiva; }
+    public void setEstaActiva(boolean estaActiva) { this.estaActiva = estaActiva; }
 }
