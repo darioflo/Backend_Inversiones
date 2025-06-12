@@ -2,14 +2,17 @@ package com.darioflo.proyecto_inversiones.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.darioflo.proyecto_inversiones.models.helpers.CuentaHelpModel;
+import com.darioflo.proyecto_inversiones.models.helpers.InversionHelpModel;
+
 @Document(collection = "inversionesCuentas")
 public class InversionesCuentaModel {
 
     @Id
     private String idInversionCuenta;
 
-    private Cuenta cuenta;
-    private Inversion Inversion;//
+    private CuentaHelpModel cuenta;
+    private InversionHelpModel Inversion;//
     private boolean estaActiva;
     private int plazo;
     private double tasa;
@@ -30,19 +33,19 @@ public class InversionesCuentaModel {
         this.idInversionCuenta = idInversionCuenta;
     }
 
-    public Cuenta getCuenta() {
+    public CuentaHelpModel getCuenta() {
         return cuenta;
     }
 
-    public void setCuenta(Cuenta nuevaCuenta) {
+    public void setCuenta(CuentaHelpModel nuevaCuenta) {
         this.cuenta = nuevaCuenta;
     }
 
-    public Inversion getInversion() {
+    public InversionHelpModel getInversion() {
         return Inversion;
     }
 
-    public void setInversion(Inversion Inversion) {
+    public void setInversion(InversionHelpModel Inversion) {
         this.Inversion = Inversion;
     }
 
@@ -118,52 +121,4 @@ public class InversionesCuentaModel {
         this.fechaFin = nuevaFecha;
     }
 
-    // Sublases internas para idCuenta y idInversion
-    public static class Cuenta {
-    private String id;
-    private String numeroCuenta;
-    private Integer saldo;
-
-    public String getId() { 
-        return id; 
-    }
-    public void setId(String id) { 
-        this.id = id; 
-    }
-    
-    public String getNumeroCuenta() { 
-        return numeroCuenta; 
-    }
-    public void setNumeroCuenta(String nuevoNumeroCuenta) { 
-        this.numeroCuenta = nuevoNumeroCuenta; 
-    }
-    
-    public Integer getSaldo() { 
-        return saldo; 
-    }
-    public void setSaldo(Integer nuevoSaldo) { 
-        this.saldo = nuevoSaldo; 
-    }
-}
-
-    public static class Inversion {
-        private String idInversion;
-        private String nombre;
-
-        public String getIdInversion() {
-            return idInversion;
-        }
-
-        public void setIdInversion(String idInversion) {
-            this.idInversion = idInversion;
-        }
-
-        public String getNombre(){
-            return nombre;
-        }
-
-        public void setNombre(String nuevoNombre){
-            this.nombre = nuevoNombre;
-        }
-    }
 }

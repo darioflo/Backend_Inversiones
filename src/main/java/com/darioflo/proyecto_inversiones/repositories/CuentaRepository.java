@@ -7,5 +7,6 @@ import com.darioflo.proyecto_inversiones.models.CuentaModel;
 
 @Repository
 public interface CuentaRepository extends CrudRepository<CuentaModel,String>{
+    
     public abstract ArrayList<CuentaModel> findByIdCliente(String idCliente);
 }
