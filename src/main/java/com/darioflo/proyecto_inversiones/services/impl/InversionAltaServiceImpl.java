@@ -26,7 +26,7 @@ public class InversionAltaServiceImpl implements IInversionAltaService{
     private InversionesCuentaRepository inversionesCuentaRepository;
 
     @Override
-    public InversionesCuentaModel crearInversion(InversionAltaDTO datosRecibidos){
+    public InversionesCuentaModel crearInversionCuenta(InversionAltaDTO datosRecibidos){
         
         logger.info("Iniciando creación de nueva inversión para cuenta ID: {}", datosRecibidos.getCuenta().getId());
 

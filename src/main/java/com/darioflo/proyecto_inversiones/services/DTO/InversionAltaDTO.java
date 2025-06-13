@@ -1,7 +1,7 @@
 package com.darioflo.proyecto_inversiones.services.DTO;
-
 import com.darioflo.proyecto_inversiones.models.helpers.CuentaHelpModel;
 import com.darioflo.proyecto_inversiones.models.helpers.InversionHelpModel;
+
 
 public class InversionAltaDTO {
     

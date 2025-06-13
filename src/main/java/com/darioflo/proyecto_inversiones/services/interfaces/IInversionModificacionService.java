@@ -4,5 +4,5 @@ import com.darioflo.proyecto_inversiones.services.DTO.InversionAltaDTO;
 
 
 public interface IInversionModificacionService {
-    InversionesCuentaModel actualizarInversion(String id,InversionAltaDTO datos);
+    InversionesCuentaModel editarInversionCuenta(String id,InversionAltaDTO datos);
 }

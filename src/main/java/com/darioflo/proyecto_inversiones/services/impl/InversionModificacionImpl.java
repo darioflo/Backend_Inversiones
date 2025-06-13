@@ -27,7 +27,7 @@ public class InversionModificacionImpl implements IInversionModificacionService 
     private CuentaService cuentaService;
 
     @Override
-    public InversionesCuentaModel actualizarInversion(String idInversion, InversionAltaDTO dto) {
+    public InversionesCuentaModel editarInversionCuenta(String idInversion, InversionAltaDTO dto) {
         Optional<InversionesCuentaModel> inversionOpt = inversionesCuentaRepository.findById(idInversion);
 
         if (inversionOpt.isEmpty()) {
@@ -64,6 +64,18 @@ public class InversionModificacionImpl implements IInversionModificacionService 
             }
             inversion.setSaldoInicial(nuevoSaldo);
         }
+
+            if (dto.getPlazo() != inversion.getPlazo()) {
+                    String fechaInicioStr = inversion.getFechaInicio();
+                    java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    java.time.LocalDate fechaInicio = java.time.LocalDate.parse(fechaInicioStr, formatter);
+
+                    java.time.LocalDate nuevaFechaFin = fechaInicio.plusDays(dto.getPlazo());
+                    String nuevaFechaFinStr = nuevaFechaFin.format(formatter);
+
+                    inversion.setFechaFin(nuevaFechaFinStr);
+                    inversion.setPlazo(dto.getPlazo());
+                }
 
         logger.info("Inversión actualizada correctamente con ID: {}", idInversion);
         return inversionesCuentaRepository.save(inversion);
