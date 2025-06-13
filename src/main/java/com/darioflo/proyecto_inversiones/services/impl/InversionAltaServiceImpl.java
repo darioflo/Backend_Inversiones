@@ -28,7 +28,7 @@ public class InversionAltaServiceImpl implements IInversionAltaService{
     @Override
     public InversionesCuentaModel crearInversionCuenta(InversionAltaDTO datosRecibidos){
         
-        logger.info("Iniciando creación de nueva inversión para cuenta ID: {}", datosRecibidos);
+        logger.info("Iniciando creación de nueva inversión para cuenta ID: {}", datosRecibidos.getIdInversionCuenta());
 
         CuentaModel cuenta = cuentaService.obtenerCuentaPorID(datosRecibidos.getCuenta().getId()).orElseThrow(() -> {
             logger.error("Cuenta no encontrada con ID: {}", datosRecibidos.getCuenta().getId());
