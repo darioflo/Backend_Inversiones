@@ -56,9 +56,9 @@ public class InversionModificacionImpl implements IInversionModificacionService 
                 Double saldoFinal = saldoActual - diferencia;
                 if (saldoFinal >= 0) {
                     cuenta.setSaldo(saldoFinal.intValue());
-                    cuentaService.actualizarSaldo(cuenta.getId(), cuenta.getSaldo());
+                    cuentaService.actualizarSaldo(cuenta.getIdCuenta(), cuenta.getSaldo());
                 } else {
-                    logger.warn("Saldo insuficiente en la cuenta {} para modificar inversión", cuenta.getId());
+                    logger.warn("Saldo insuficiente en la cuenta {} para modificar inversión", cuenta.getIdCuenta());
                     throw new IllegalArgumentException("Saldo insuficiente");
                 }
             }

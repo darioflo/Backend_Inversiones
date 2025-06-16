@@ -1,9 +1,12 @@
 package com.darioflo.proyecto_inversiones.models;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Data;
+
 import org.springframework.data.annotation.Id;
 
 @Document(collection = "contratos")
-
+@Data
 public class ContratoModel {
     @Id
     private String idContrato;
@@ -14,22 +17,4 @@ public class ContratoModel {
         this.idCuenta = idCuenta;
         this.tipoContrato = tipoContrato;
     }
-
-    public String getIdContrato(){
-        return this.idContrato;
-    }
-
-    public String getIdCuenta(){
-        return this.idCuenta;
-    }
-
-    public String getTipoContrato(){
-        return this.tipoContrato;
-    }
-
-    public void setTipoContrato(String tipoContratoNuevo){
-        this.tipoContrato = tipoContratoNuevo;
-    }
-
-
 }

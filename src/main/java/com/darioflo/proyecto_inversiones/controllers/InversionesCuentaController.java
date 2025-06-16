@@ -28,7 +28,6 @@ public class InversionesCuentaController {
     @Autowired
     InversionesCuentaService inversionesCuentaService;
 
-
     @Autowired
     InversionAltaServiceImpl inversionAltaServiceImpl;
 

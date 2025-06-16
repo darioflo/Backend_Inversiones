@@ -36,7 +36,7 @@ public class InversionAltaServiceImpl implements IInversionAltaService{
             });
         
         CuentaHelpModel cuentaInversion = new CuentaHelpModel();
-        cuentaInversion.setId(cuenta.getId());
+        cuentaInversion.setId(cuenta.getIdCuenta());
         cuentaInversion.setNumeroCuenta(cuenta.getNumeroCuenta());
         cuentaInversion.setSaldo(cuenta.getSaldo());
 
@@ -47,7 +47,7 @@ public class InversionAltaServiceImpl implements IInversionAltaService{
         inversionDatos.setNombre(inversion.getNombre());
 
         if (cuenta.getSaldo() < datosRecibidos.getSaldoInicial()) {
-            logger.warn("Saldo insuficiente para cuenta ID: {}", cuenta.getId());
+            logger.warn("Saldo insuficiente para cuenta ID: {}", cuenta.getIdCuenta());
             throw new IllegalArgumentException("Saldo insuficiente en la cuenta.");
         }
 
@@ -64,9 +64,9 @@ public class InversionAltaServiceImpl implements IInversionAltaService{
         nueva.setFechaFin(datosRecibidos.getFechaFin());
         nueva.setEstaActiva(true);
 
-        cuentaService.actualizarSaldo(cuenta.getId(), cuenta.getSaldo() - datosRecibidos.getSaldoInicial().intValue());
+        cuentaService.actualizarSaldo(cuenta.getIdCuenta(), cuenta.getSaldo() - datosRecibidos.getSaldoInicial().intValue());
 
-        logger.info("Inversión creada correctamente para cuenta ID: {}", cuenta.getId());
+        logger.info("Inversión creada correctamente para cuenta ID: {}", cuenta.getIdCuenta());
         return inversionesCuentaRepository.save(nueva);
     }
 
