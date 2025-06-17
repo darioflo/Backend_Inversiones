@@ -15,7 +15,7 @@ public class InversionesCuentaModel {
     private String idInversionCuenta;
 
     private CuentaHelpModel cuenta;
-    private InversionHelpModel Inversion;
+    private InversionHelpModel inversion;
     private boolean estaActiva;
     private int plazo;
     private double tasa;

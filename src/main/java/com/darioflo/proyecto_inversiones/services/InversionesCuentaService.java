@@ -37,7 +37,7 @@ public class InversionesCuentaService {
         inversionExistente.setSaldoAlTermino(datosActualizados.getSaldoAlTermino());
         inversionExistente.setInstruccionVencimiento(datosActualizados.getInstruccionVencimiento());
         
-        String idCuenta = datosActualizados.getCuenta().getId();
+        String idCuenta = datosActualizados.getCuenta().getIdCuenta();
         Double nuevoSaldoInicial = datosActualizados.getSaldoInicial();
         CuentaModel cuenta = cuentaService.obtenerCuentaPorID(idCuenta).orElse(null);
         if (cuenta != null) {

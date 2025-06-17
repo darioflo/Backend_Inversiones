@@ -30,13 +30,13 @@ public class InversionAltaServiceImpl implements IInversionAltaService{
         
         logger.info("Iniciando creación de nueva inversión para cuenta ID: {}", datosRecibidos.getIdInversionCuenta());
 
-        CuentaModel cuenta = cuentaService.obtenerCuentaPorID(datosRecibidos.getCuenta().getId()).orElseThrow(() -> {
-            logger.error("Cuenta no encontrada con ID: {}", datosRecibidos.getCuenta().getId());
+        CuentaModel cuenta = cuentaService.obtenerCuentaPorID(datosRecibidos.getCuenta().getIdCuenta()).orElseThrow(() -> {
+            logger.error("Cuenta no encontrada con ID: {}", datosRecibidos.getCuenta().getIdCuenta());
             return new IllegalArgumentException("Cuenta no encontrada.");
             });
         
         CuentaHelpModel cuentaInversion = new CuentaHelpModel();
-        cuentaInversion.setId(cuenta.getIdCuenta());
+        cuentaInversion.setIdCuenta(cuenta.getIdCuenta());
         cuentaInversion.setNumeroCuenta(cuenta.getNumeroCuenta());
         cuentaInversion.setSaldo(cuenta.getSaldo());
 
