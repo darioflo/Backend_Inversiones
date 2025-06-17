@@ -4,7 +4,8 @@ import com.darioflo.proyecto_inversiones.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
-import java.util.Collections;
+
+import java.util.ArrayList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -17,10 +18,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }
-        return new User(
-            usuario.getNombreUsuario(),
-            usuario.getClave(),
-            Collections.emptyList()
+         return new org.springframework.security.core.userdetails.User(
+                usuario.getNombreUsuario(),
+                usuario.getClave(),
+                new ArrayList<>()
         );
     }
 }
