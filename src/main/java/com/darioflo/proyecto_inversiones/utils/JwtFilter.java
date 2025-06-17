@@ -1,59 +1,46 @@
 package com.darioflo.proyecto_inversiones.utils;
-import java.io.IOException;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import com.darioflo.proyecto_inversiones.models.UsuarioModel;
-import com.darioflo.proyecto_inversiones.services.UsuarioService;
-
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 @Component
-public class JwtFilter extends OncePerRequestFilter{
+public class JwtFilter implements Filter {
 
     @Autowired
     private JwtUtil jwtUtil;
 
-    @Autowired 
-    private UsuarioService usuarioService;
-
-
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,FilterChain chain)
-    throws ServletException, IOException {
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest solicitud = (HttpServletRequest) req;
+        HttpServletResponse respuesta = (HttpServletResponse) res;
 
-        final String headerAutorizacion = request.getHeader("Authorization");
-        String nombreUsuario = null;
-        String jwt = null;
+        String ruta = solicitud.getRequestURI();
 
-        if (headerAutorizacion != null && headerAutorizacion.startsWith("Bearer ")) {
-            jwt = headerAutorizacion.substring(7);
-            nombreUsuario = jwtUtil.obtenerNombreUsuario(jwt);
+        // Rutas públicas que no requieren token
+        if (ruta.startsWith("/api/auth") || ruta.startsWith("/usuarios")) {
+            chain.doFilter(req, res);
+            return;
         }
 
-        if (headerAutorizacion != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UsuarioModel usuario = usuarioService.obtenerPorNombreUsuario(nombreUsuario);
-
-
-            if(jwtUtil.validarToken(jwt, usuario.getNombreUsuario())){
-                UsernamePasswordAuthenticationToken tokenAutenticacion = new UsernamePasswordAuthenticationToken(jwt, usuario);
-                
-                tokenAutenticacion.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(tokenAutenticacion);
-            }
+        String cabecera = solicitud.getHeader("Authorization");
+        if (cabecera == null || !cabecera.startsWith("Bearer ")) {
+            respuesta.sendError(HttpStatus.UNAUTHORIZED.value(), "Falta token");
+            return;
         }
 
-        chain.doFilter(request, response);
+        String token = cabecera.substring(7);
+        if (!jwtUtil.validarToken(token)) {
+            respuesta.sendError(HttpStatus.UNAUTHORIZED.value(), "Token inválido");
+            return;
+        }
 
+        // Token válido → continuar
+        chain.doFilter(req, res);
     }
-    
 }

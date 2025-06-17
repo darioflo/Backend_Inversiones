@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.darioflo.proyecto_inversiones.models.UsuarioModel;
 import com.darioflo.proyecto_inversiones.services.UsuarioService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,8 +33,8 @@ public class UsuarioController {
         return usuarioService.agregarUsuario(usuarioNuevo);
     }
 
-    @GetMapping("")
-    public UsuarioModel obtenerPorNombreUsuario(@RequestParam String nombreUsuario) {
+    @GetMapping("/{nombreUsuario}")
+    public UsuarioModel obtenerPorNombreUsuario(@PathVariable @RequestParam String nombreUsuario) {
         return usuarioService.obtenerPorNombreUsuario(nombreUsuario);
     }
     
