@@ -50,7 +50,7 @@ public class InversionModificacionImpl implements IInversionModificacionService 
             Double nuevoSaldo = dto.getSaldoInicial();
             Double diferencia = nuevoSaldo - saldoAnterior;
 
-            CuentaModel cuenta = cuentaService.obtenerCuentaPorID(dto.getCuenta().getIdCuenta()).orElse(null);
+            CuentaModel cuenta = cuentaService.obtenerCuentaPorID(dto.getCuenta().getIdCuenta());
             if (cuenta != null) {
                 Double saldoActual = cuenta.getSaldo().doubleValue();
                 Double saldoFinal = saldoActual - diferencia;

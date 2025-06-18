@@ -39,7 +39,7 @@ public class InversionesCuentaService {
         
         String idCuenta = datosActualizados.getCuenta().getIdCuenta();
         Double nuevoSaldoInicial = datosActualizados.getSaldoInicial();
-        CuentaModel cuenta = cuentaService.obtenerCuentaPorID(idCuenta).orElse(null);
+        CuentaModel cuenta = cuentaService.obtenerCuentaPorID(idCuenta);
         if (cuenta != null) {
             Double saldoActual = cuenta.getSaldo().doubleValue();
             Double saldoFinal = saldoActual - nuevoSaldoInicial;

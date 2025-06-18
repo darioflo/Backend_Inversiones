@@ -2,7 +2,10 @@ package com.darioflo.proyecto_inversiones.services;
 import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.darioflo.proyecto_inversiones.models.CuentaModel;
 import com.darioflo.proyecto_inversiones.repositories.CuentaRepository;
 
@@ -14,12 +17,17 @@ public class CuentaService {
     public ArrayList<CuentaModel> obtenerCuentas(){
         return (ArrayList<CuentaModel>) cuentaRepository.findAll();
     }
-    public Optional<CuentaModel> obtenerCuentaPorID(String id){
-        return cuentaRepository.findById(id);
+    public CuentaModel obtenerCuentaPorID(String id){
+        return cuentaRepository.findById(id)
+        .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cuenta no encontrada"));
     }
 
     public ArrayList<CuentaModel> obtenerCuentasCliente(String id){
-        return cuentaRepository.findByIdCliente(id);
+        ArrayList<CuentaModel> cuentas = cuentaRepository.findByIdCliente(id);
+        if (cuentas.size() == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No existen cuentas para ese id");
+        }
+        return cuentas;
     }
 
     public CuentaModel actualizarSaldo(String id,Integer nuevoSaldo){
