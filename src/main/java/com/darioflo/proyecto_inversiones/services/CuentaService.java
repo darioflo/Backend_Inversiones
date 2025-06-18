@@ -37,7 +37,7 @@ public class CuentaService {
             cuentaActual.setSaldo(nuevoSaldo);
             return cuentaRepository.save(cuentaActual);
             }
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cuenta no encontrada");
         }
 
     public String generarNumeroCuenta(String tipoCuenta){
@@ -60,9 +60,16 @@ public class CuentaService {
         return prefijo +"-"+ String.format("%05d", total+1);
     }
 
-    public CuentaModel crearCuenta(String idCliente, Integer saldo, String tipoCuenta){
+    public CuentaModel crearCuenta(String idCliente, Integer saldo, String tipoCuenta) {
+        if (idCliente == null || idCliente.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID de cliente requerido");
+        }
+        if (saldo == null || saldo < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Saldo inválido");
+        }
         String nuevoNumeroCuenta = generarNumeroCuenta(tipoCuenta);
-        CuentaModel nuevaCuenta = new CuentaModel(idCliente,saldo,tipoCuenta,nuevoNumeroCuenta );
+        CuentaModel nuevaCuenta = new CuentaModel(idCliente, saldo, tipoCuenta, nuevoNumeroCuenta);
         return cuentaRepository.save(nuevaCuenta);
     }
+    
 }

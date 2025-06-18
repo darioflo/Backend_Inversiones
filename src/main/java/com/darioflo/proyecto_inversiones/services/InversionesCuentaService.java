@@ -2,7 +2,9 @@ package com.darioflo.proyecto_inversiones.services;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.darioflo.proyecto_inversiones.models.CuentaModel;
 import com.darioflo.proyecto_inversiones.models.InversionesCuentaModel;
@@ -17,15 +19,22 @@ public class InversionesCuentaService {
     @Autowired
     CuentaService cuentaService;
 
-    public ArrayList<InversionesCuentaModel> obtenerInversionesCuentas(){
-        return (ArrayList<InversionesCuentaModel>) inversionesCuentaRepository.findAll();
+   public ArrayList<InversionesCuentaModel> obtenerInversionesCuentas() {
+    ArrayList<InversionesCuentaModel> inversiones = (ArrayList<InversionesCuentaModel>) inversionesCuentaRepository.findAll();
+    if (inversiones.isEmpty()) {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay inversiones de cuentas registradas");
     }
+    return inversiones;
+}
 
-    public InversionesCuentaModel crearInversionCuenta(InversionesCuentaModel nuevaInversion){
+    public InversionesCuentaModel crearInversionCuenta(InversionesCuentaModel nuevaInversion) {
+        if (nuevaInversion == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La inversión no puede ser nula");
+        }
         return inversionesCuentaRepository.save(nuevaInversion);
     }
 
-    public InversionesCuentaModel editarInversionCuenta(String id, InversionesCuentaModel datosActualizados){
+    public InversionesCuentaModel editarInversionCuenta(String id, InversionesCuentaModel datosActualizados) {
         return inversionesCuentaRepository.findById(id).map(inversionExistente -> {
         inversionExistente.setCuenta(datosActualizados.getCuenta());
         inversionExistente.setInversion(datosActualizados.getInversion());
@@ -36,7 +45,7 @@ public class InversionesCuentaService {
         inversionExistente.setSaldoInicial(datosActualizados.getSaldoInicial());
         inversionExistente.setSaldoAlTermino(datosActualizados.getSaldoAlTermino());
         inversionExistente.setInstruccionVencimiento(datosActualizados.getInstruccionVencimiento());
-        
+
         String idCuenta = datosActualizados.getCuenta().getIdCuenta();
         Double nuevoSaldoInicial = datosActualizados.getSaldoInicial();
         CuentaModel cuenta = cuentaService.obtenerCuentaPorID(idCuenta);
@@ -46,14 +55,21 @@ public class InversionesCuentaService {
             if (saldoFinal >= 0) {
                 cuenta.setSaldo(saldoFinal.intValue());
                 cuentaService.actualizarSaldo(idCuenta, cuenta.getSaldo());
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Saldo insuficiente en la cuenta");
             }
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cuenta asociada no encontrada");
         }
 
         return inversionesCuentaRepository.save(inversionExistente);
-    }).orElse(null);
-    }
+    }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Inversión no encontrada"));
+}
 
-    public void eliminarInversionCuenta(String id){
+    public void eliminarInversionCuenta(String id) {
+        if (!inversionesCuentaRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inversión no encontrada para eliminar");
+        }
         inversionesCuentaRepository.deleteById(id);
     }
 }
