@@ -11,6 +11,7 @@ import com.darioflo.proyecto_inversiones.repositories.ClienteRepository;
 
 @Service
 public class ClienteService {
+    
     @Autowired
     ClienteRepository clienteRepository;
 
