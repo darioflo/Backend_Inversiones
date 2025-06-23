@@ -38,6 +38,4 @@ public class UsuarioController {
         return usuarioService.obtenerPorNombreUsuario(nombreUsuario);
     }
     
-    
-
 }
