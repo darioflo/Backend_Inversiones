@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin(origins = "*")
 public class UsuarioController {
     
-    
     @Autowired
     public UsuarioService usuarioService;
 
